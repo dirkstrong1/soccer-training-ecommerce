@@ -4,13 +4,40 @@ import Navbar from "@/components/Navbar";
 import { notFound } from "next/navigation";
 import { DownloadPDFButton } from "@/components/PdfTemplates";
 import DrillVideo from '@/components/DrillVideo';
-import { Program, Drill, CurriculumWeek } from '@/types/program';
+import { Program, CurriculumWeek } from '@/types/program';
 
 interface WeeklySchedule {
-  week: number;
+  weekNumber: number;
   focus: string;
+  description: string;
+  objectives: string[];
   activities: string[];
   drills: Drill[];
+}
+
+interface PositionSession {
+  position: string;
+  description?: string;
+  drills: Drill[];
+  focus?: string[];
+}
+
+interface Drill {
+  name: string;
+  description: string;
+  duration: string;
+  metrics?: string[];
+  equipment?: string[];
+  difficulty?: string;
+  progressions?: string[];
+  focus?: string[];
+  video?: {
+    url: string;
+    license?: {
+      expirationDate: string;
+      territoryRestrictions?: string[];
+    };
+  };
 }
 
 interface ProgressTracking {
@@ -216,6 +243,12 @@ const programs: ProgramWithPreview[] = [
           "Speed and agility with ball",
           "Position-specific drills"
         ],
+        activities: [
+          "Technical drills",
+          "Ball mastery exercises",
+          "Speed and agility training",
+          "Position-specific work"
+        ],
         drills: [
           {
             name: "La Masia Rondo",
@@ -245,6 +278,12 @@ const programs: ProgramWithPreview[] = [
           "Team shape and movement",
           "Advanced game scenarios"
         ],
+        activities: [
+          "Tactical analysis",
+          "Game scenarios",
+          "Team shape work",
+          "Decision-making exercises"
+        ],
         drills: [
           {
             name: "Positional Play",
@@ -265,8 +304,15 @@ const programs: ProgramWithPreview[] = [
         ]
       },
       {
-        week: 6,
+        weekNumber: 6,
         focus: "Game Integration",
+        description: "Applying technical and tactical skills in game situations",
+        objectives: [
+          "High-intensity application",
+          "Game-specific scenarios",
+          "Competitive implementation",
+          "Match analysis"
+        ],
         activities: [
           "High-intensity technical drills",
           "Complex tactical situations",
@@ -278,19 +324,30 @@ const programs: ProgramWithPreview[] = [
             name: "Pressure Training",
             description: "High-intensity technical skills under pressure",
             duration: "25 minutes",
-            progressions: ["Technical pressure", "Physical pressure", "Combined pressure"]
+            metrics: ["Technical precision", "Speed of execution", "Decision making"],
+            equipment: ["Cones", "Soccer balls", "Training vests"],
+            difficulty: "Advanced"
           },
           {
             name: "Game Scenarios",
             description: "Match-specific situations with tactical objectives",
             duration: "35 minutes",
-            progressions: ["Set scenarios", "Dynamic scenarios", "Full game integration"]
+            metrics: ["Structured play", "High pressure", "Match conditions"],
+            equipment: ["Cones", "Soccer balls", "Goals"],
+            difficulty: "Advanced"
           }
         ]
       },
       {
-        week: 8,
+        weekNumber: 8,
         focus: "Performance Evaluation",
+        description: "Final assessment of player development",
+        objectives: [
+          "Technical proficiency",
+          "Tactical understanding",
+          "Competitive performance",
+          "Individual analysis"
+        ],
         activities: [
           "Technical assessments",
           "Tactical understanding tests",
@@ -302,13 +359,17 @@ const programs: ProgramWithPreview[] = [
             name: "Performance Testing",
             description: "Comprehensive technical and tactical assessment",
             duration: "40 minutes",
-            metrics: ["Technical proficiency", "Decision making", "Physical performance"]
+            metrics: ["Technical proficiency", "Decision making", "Physical performance"],
+            equipment: ["Testing equipment", "Soccer balls", "Cones"],
+            difficulty: "Advanced"
           },
           {
             name: "Competitive Evaluation",
             description: "Match play with specific focus areas",
             duration: "45 minutes",
-            focus: ["Application of learning", "Game intelligence", "Position-specific roles"]
+            metrics: ["Match performance", "Leadership", "Game management"],
+            equipment: ["Match equipment", "Training vests", "Goals"],
+            difficulty: "Advanced"
           }
         ]
       }
@@ -316,20 +377,20 @@ const programs: ProgramWithPreview[] = [
     previewContent: {
       sampleWeek: {
         weekNumber: 1,
-        focus: "Technical Mastery",
-        description: "Advanced ball control techniques and complex dribbling patterns",
+        focus: "Professional Assessment",
+        description: "Comprehensive evaluation of player abilities",
         objectives: [
-          "Advanced ball control techniques",
-          "Complex dribbling patterns",
-          "Speed and agility with ball",
-          "Position-specific drills"
+          "Technical skill assessment",
+          "Physical fitness evaluation",
+          "Tactical understanding",
+          "Mental preparation"
         ]
       },
       highlights: [
-        "Professional-level technical training",
-        "Position-specific development tracks",
-        "Video analysis sessions",
-        "Performance metrics tracking"
+        "Professional-standard training methodology",
+        "Performance analytics and video analysis",
+        "College/Professional pathway preparation",
+        "Mental performance coaching"
       ]
     },
     positionSpecificSessions: [
@@ -340,54 +401,24 @@ const programs: ProgramWithPreview[] = [
             name: "Shot Stopping Mastery",
             description: "Advanced shot-stopping techniques from various angles and distances",
             duration: "30 minutes",
-            progressions: ["Ground shots", "Mid-height shots", "High shots", "Deflections"],
-            metrics: ["Save percentage", "Positioning score", "Recovery speed"]
+            metrics: ["Save percentage", "Positioning score", "Recovery speed"],
+            equipment: ["Goals", "Soccer balls", "Training cones"],
+            difficulty: "Advanced"
           },
           {
             name: "Distribution Training",
             description: "Modern goalkeeper distribution and build-up play",
             duration: "25 minutes",
-            focus: ["Short passing", "Long distribution", "Goal kicks", "Counter-attack initiation"],
-            progressions: ["Static targets", "Moving targets", "Under pressure"]
-          },
-          {
-            name: "Cross Management",
-            description: "Commanding the box and handling crosses",
-            duration: "25 minutes",
-            progressions: ["Unopposed catches", "Contested catches", "Punch clearances"],
-            metrics: ["Success rate", "Decision making", "Command of area"]
-          },
-          {
-            name: "1v1 Situations",
-            description: "Advanced techniques for handling breakaways and 1v1 scenarios",
-            duration: "25 minutes",
-            progressions: ["Positioning work", "Timing exercises", "Full speed situations"],
-            metrics: ["Success rate", "Decision making", "Reaction time"]
-          },
-          {
-            name: "Footwork & Agility",
-            description: "Specialized goalkeeper footwork and movement patterns",
-            duration: "20 minutes",
-            progressions: ["Basic patterns", "Complex movements", "Reaction drills"],
-            metrics: ["Movement efficiency", "Balance control", "Recovery position"]
-          },
-          {
-            name: "Set-Piece Organization",
-            description: "Wall setup and defensive organization for free kicks and corners",
-            duration: "25 minutes",
-            focus: ["Wall positioning", "Communication", "Area coverage"],
-            progressions: ["Static setup", "Dynamic adjustment", "Match simulation"]
+            metrics: ["Short passing", "Long distribution", "Goal kicks", "Counter-attack initiation"],
+            equipment: ["Goals", "Soccer balls", "Training cones"],
+            difficulty: "Advanced"
           }
         ],
         focus: [
           "Shot-stopping techniques",
           "Modern distribution skills",
           "Aerial command",
-          "Leadership and communication",
-          "Positioning and angles",
-          "1v1 situations",
-          "Set-piece management",
-          "Quick recovery and transitions"
+          "Leadership and communication"
         ]
       },
       {
@@ -397,14 +428,17 @@ const programs: ProgramWithPreview[] = [
             name: "Elite Finishing",
             description: "Advanced shooting techniques from various angles and situations",
             duration: "30 minutes",
-            progressions: ["Static finishing", "Dynamic finishing", "Game-speed finishing"],
-            metrics: ["Conversion rate", "Technique score", "Decision making"]
+            metrics: ["Conversion rate", "Technique score", "Decision making"],
+            equipment: ["Goals", "Soccer balls", "Training cones"],
+            difficulty: "Advanced"
           },
           {
             name: "Movement Pattern Training",
             description: "Professional striker movement patterns and positioning",
             duration: "25 minutes",
-            focus: ["Off-ball movement", "Creating space", "Timing runs"]
+            metrics: ["Off-ball movement", "Creating space", "Timing runs"],
+            equipment: ["Training vests", "Cones", "Soccer balls"],
+            difficulty: "Advanced"
           }
         ],
         focus: [
@@ -421,14 +455,17 @@ const programs: ProgramWithPreview[] = [
             name: "360° Awareness",
             description: "Midfield scanning and awareness training",
             duration: "25 minutes",
-            progressions: ["Static scanning", "Dynamic scanning", "Under pressure"],
-            metrics: ["Scan frequency", "Decision accuracy", "Pass completion"]
+            metrics: ["Scan frequency", "Decision accuracy", "Pass completion"],
+            equipment: ["Cones", "Soccer balls", "Training vests"],
+            difficulty: "Advanced"
           },
           {
             name: "Line-Breaking Passes",
             description: "Progressive passing techniques and execution",
             duration: "30 minutes",
-            focus: ["Pass selection", "Weight of pass", "Receiving position"]
+            metrics: ["Pass selection", "Weight of pass", "Receiving position"],
+            equipment: ["Cones", "Soccer balls", "Training vests"],
+            difficulty: "Advanced"
           }
         ],
         focus: [
@@ -445,14 +482,17 @@ const programs: ProgramWithPreview[] = [
             name: "Defensive Positioning",
             description: "Elite defensive positioning and body orientation",
             duration: "25 minutes",
-            progressions: ["1v1 defending", "Unit defending", "High-line defense"],
-            metrics: ["Duel success", "Recovery speed", "Positioning score"]
+            metrics: ["Duel success", "Recovery speed", "Positioning score"],
+            equipment: ["Cones", "Soccer balls", "Training cones"],
+            difficulty: "Advanced"
           },
           {
             name: "Build-Up Play",
             description: "Modern defender ball progression training",
             duration: "30 minutes",
-            focus: ["Playing out from back", "Long-range passing", "Press resistance"]
+            metrics: ["Playing out from back", "Long-range passing", "Press resistance"],
+            equipment: ["Cones", "Soccer balls", "Training cones"],
+            difficulty: "Advanced"
           }
         ],
         focus: [
@@ -607,6 +647,13 @@ const programs: ProgramWithPreview[] = [
       {
         week: 16,
         focus: "Elite Performance",
+        description: "Final performance assessment and game preparation",
+        objectives: [
+          "Match performance",
+          "Tournament readiness",
+          "Team integration",
+          "Leadership development"
+        ],
         activities: [
           "High-level match play",
           "Performance analysis",
@@ -618,13 +665,17 @@ const programs: ProgramWithPreview[] = [
             name: "Elite Performance Test",
             description: "Comprehensive evaluation of all aspects",
             duration: "90 minutes",
-            metrics: ["Technical mastery", "Tactical excellence", "Physical performance", "Mental readiness"]
+            metrics: ["Technical mastery", "Tactical excellence", "Physical performance", "Mental readiness"],
+            equipment: ["Testing equipment", "Soccer balls", "Cones"],
+            difficulty: "Advanced"
           },
           {
             name: "Professional Standard Games",
             description: "Full matches with professional rules and intensity",
             duration: "70 minutes",
-            focus: ["Match performance", "Leadership", "Game management"]
+            metrics: ["Match performance", "Leadership", "Game management"],
+            equipment: ["Match equipment", "Training vests", "Goals"],
+            difficulty: "Advanced"
           }
         ]
       }
@@ -824,7 +875,7 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
                               <div>
                                 <h4 className="font-semibold text-gray-700 mb-2">Focus Areas:</h4>
                                 <ul className="space-y-2">
-                                  {posSession.focus.map((item, i) => (
+                                  {posSession.focus?.map((item, i) => (
                                     <li key={i} className="text-gray-600">• {item}</li>
                                   ))}
                                 </ul>
