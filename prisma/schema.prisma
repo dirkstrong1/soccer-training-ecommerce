@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model VideoLicense {
+  id                   String       @id @default(cuid())
+  type                 String       // 'own' | 'licensed' | 'creative-commons' | 'partnership'
+  startDate           DateTime
+  expirationDate      DateTime?
+  terms               String[]
+  restrictions        String[]
+  territoryRestrictions String[]
+  renewalTerms        String?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  video               VideoContent @relation(fields: [videoId], references: [id])
+  videoId             String       @unique
+}
+
+model VideoContent {
+  id            String       @id @default(cuid())
+  url           String
+  title         String
+  creator       String
+  createdDate   DateTime
+  duration      String
+  attribution   String
+  thumbnailUrl  String?
+  tags          String[]
+  license       VideoLicense?
+  drills        Drill[]     // Relation to drills using this video
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Drill {
+  id          String       @id @default(cuid())
+  name        String
+  description String
+  duration    String
+  metrics     String[]
+  equipment   String[]
+  difficulty  String      // 'Beginner' | 'Intermediate' | 'Advanced'
+  video       VideoContent? @relation(fields: [videoId], references: [id])
+  videoId     String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  // Add relations to other models as needed
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  type      String   // e.g., 'LICENSE_EXPIRING'
+  title     String
+  message   String
+  status    String   // 'READ' | 'UNREAD'
+  metadata  Json     // Flexible metadata storage
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

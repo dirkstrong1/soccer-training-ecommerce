@@ -1,0 +1,11 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/check-licenses",
+      "schedule": "0 0 * * *"
+    }
+  ],
+  "env": {
+    "CRON_SECRET_KEY": "@cron_secret_key"
+  }
+} 
