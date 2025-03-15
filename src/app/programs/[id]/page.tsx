@@ -66,13 +66,13 @@ const programs: ProgramWithPreview[] = [
     curriculum: [
       {
         weekNumber: 1,
-        focus: "Foundation & Assessment",
-        description: "Introduction to basic techniques and initial skill assessment",
+        focus: "Technical Mastery",
+        description: "Advanced ball control techniques and complex dribbling patterns",
         objectives: [
-          "Complete individual skill assessment",
-          "Learn basic ball control exercises",
-          "Practice fundamental passing techniques",
-          "Participate in small-sided games"
+          "Advanced ball control techniques",
+          "Complex dribbling patterns",
+          "Speed and agility with ball",
+          "Position-specific drills"
         ],
         drills: [
           {
@@ -80,26 +80,61 @@ const programs: ProgramWithPreview[] = [
             description: "Progressive ball control exercises",
             duration: "20 minutes",
             video: {
+              id: "video-1",
               url: "https://www.youtube.com/watch?v=q1B4is3faOM",
               title: "Professional Ball Mastery Training",
               creator: "Soccer Training Videos",
-              license: "partnership",
-              attribution: "© Soccer Training Videos - Used with permission"
+              createdDate: "2024-01-01",
+              duration: "20 minutes",
+              license: {
+                id: "license-1",
+                type: "partnership",
+                startDate: "2024-01-01",
+                terms: ["Commercial use allowed", "Attribution required"],
+                restrictions: [],
+                territoryRestrictions: []
+              },
+              attribution: "© Soccer Training Videos - Used with permission",
+              tags: ["ball control", "mastery", "beginner"]
             },
             metrics: ["Ball touches per minute", "Successful moves completed"],
             equipment: ["Cones", "Soccer ball"],
             difficulty: "Beginner"
-          },
+          }
+        ]
+      },
+      {
+        weekNumber: 2,
+        focus: "First Touch Development",
+        description: "Receiving and controlling passes under pressure",
+        objectives: [
+          "Clean first touches",
+          "Control under pressure",
+          "Passing combinations",
+          "Movement patterns"
+        ],
+        drills: [
           {
             name: "First Touch Development",
             description: "Receiving and controlling passes",
             duration: "25 minutes",
             video: {
+              id: "video-2",
               url: "https://www.youtube.com/watch?v=9Hdg3D6QuPs",
               title: "Advanced First Touch Training",
               creator: "Soccer Training Videos",
-              license: "partnership",
-              attribution: "© Soccer Training Videos - Used with permission"
+              createdDate: "2024-01-01",
+              duration: "25 minutes",
+              license: {
+                id: "license-2",
+                type: "partnership",
+                startDate: "2024-01-01",
+                terms: ["Commercial use allowed", "Attribution required"],
+                restrictions: [],
+                territoryRestrictions: []
+              },
+              attribution: "© Soccer Training Videos - Used with permission",
+              tags: ["first touch", "control", "intermediate"]
             },
             metrics: ["Clean first touches", "Control under pressure"],
             equipment: ["Soccer balls", "Passing gates"],
@@ -200,9 +235,10 @@ const programs: ProgramWithPreview[] = [
     ],
     weeklySchedule: [
       {
-        week: 1,
+        weekNumber: "1",
         focus: "Technical Mastery",
-        activities: [
+        description: "Advanced ball control techniques and complex dribbling patterns",
+        objectives: [
           "Advanced ball control techniques",
           "Complex dribbling patterns",
           "Speed and agility with ball",
@@ -213,13 +249,17 @@ const programs: ProgramWithPreview[] = [
             name: "La Masia Rondo",
             description: "Advanced possession game with positional rotations",
             duration: "25 minutes",
-            progressions: ["6v2", "5v2 one-touch", "4v2 with target player"]
+            metrics: ["6v2", "5v2 one-touch", "4v2 with target player"],
+            equipment: ["Cones", "Soccer balls"],
+            difficulty: "Advanced"
           },
           {
             name: "Technical Circuit",
             description: "Complex skill sequence combining multiple techniques",
             duration: "30 minutes",
-            progressions: ["Individual practice", "With passive defender", "With active defender"]
+            metrics: ["Individual practice", "With passive defender", "With active defender"],
+            equipment: ["Cones", "Soccer balls", "Training vests"],
+            difficulty: "Intermediate"
           }
         ]
       },
