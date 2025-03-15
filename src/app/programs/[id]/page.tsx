@@ -21,6 +21,8 @@ interface ProgressTracking {
 
 interface ProgramWithPreview extends Program {
   image: string;
+  fullDescription?: string;
+  sessionsPerWeek?: number;
   previewContent: {
     sampleWeek: {
       weekNumber: number;
@@ -30,6 +32,8 @@ interface ProgramWithPreview extends Program {
     };
     highlights: string[];
   };
+  weeklySchedule?: WeeklySchedule[];
+  progressTracking?: ProgressTracking;
 }
 
 const programs: ProgramWithPreview[] = [
@@ -155,37 +159,51 @@ const programs: ProgramWithPreview[] = [
     }
   },
   {
-    id: 2,
+    id: "2",
     title: "Advanced Skills Camp (Ages 13-16)",
     description: "Inspired by La Masia's training philosophy, emphasizing technical excellence and tactical understanding through position-specific training.",
     fullDescription: `Building on Barcelona's La Masia methodology, this program focuses on:
     • Advanced Technical Skills: Complex ball control and skill moves
     • Tactical Understanding: Reading the game and making quick decisions
     • Position-Specific Training: Specialized drills for different positions
-    • Physical Development: Speed, agility, and soccer-specific strength training
-    
-    Progress Tracking & Feedback:
-    • Performance analytics using video analysis
-    • Individual skill development metrics
-    • Position-specific competency tracking
-    • Monthly progress reports and consultations
-    
-    Equipment Provided:
-    • Professional training ball
-    • GPS tracking vest
-    • Training uniform kit
-    • Online performance dashboard access`,
+    • Physical Development: Speed, agility, and soccer-specific strength training`,
     price: 299,
     duration: "8 weeks",
     sessionsPerWeek: 3,
     image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80",
     curriculum: [
-      "Advanced Ball Control",
-      "Speed & Agility with Ball",
-      "Position-Specific Skills",
-      "Game Tactics & Strategy",
-      "Team Play Concepts",
-      "Competitive Matches"
+      {
+        weekNumber: 1,
+        focus: "Advanced Ball Control",
+        description: "Master advanced ball control techniques",
+        objectives: ["Ball mastery", "First touch", "Dribbling"],
+        drills: [
+          {
+            name: "Ball Mastery Circuit",
+            description: "Progressive ball control exercises",
+            duration: "20 minutes",
+            metrics: ["Ball touches per minute", "Successful moves completed"],
+            equipment: ["Cones", "Soccer ball"],
+            difficulty: "Beginner"
+          }
+        ]
+      },
+      {
+        weekNumber: 2,
+        focus: "Speed & Agility with Ball",
+        description: "Develop speed and agility while maintaining ball control",
+        objectives: ["Quick turns", "Acceleration with ball", "Change of direction"],
+        drills: [
+          {
+            name: "Speed Dribbling",
+            description: "High-intensity dribbling exercises",
+            duration: "25 minutes",
+            metrics: ["Sprint times", "Ball control accuracy"],
+            equipment: ["Cones", "Soccer balls", "Timing gates"],
+            difficulty: "Intermediate"
+          }
+        ]
+      }
     ],
     weeklySchedule: [
       {
@@ -467,37 +485,51 @@ const programs: ProgramWithPreview[] = [
     }
   },
   {
-    id: 3,
+    id: "3",
     title: "Elite Performance Program (Ages 15-18)",
     description: "Based on professional academy standards, preparing players for high-level competition with advanced tactical and technical training.",
     fullDescription: `Developed with input from professional coaches, this elite program includes:
     • High-Performance Training: Professional-level drills and exercises
     • Advanced Tactical Concepts: Complex game situations and solutions
     • Mental Conditioning: Developing resilience and competitive mindset
-    • Performance Analysis: Video analysis and feedback sessions
-    
-    Progress Tracking & Feedback:
-    • Professional-grade performance analytics
-    • Mental performance assessments
-    • Competition readiness evaluations
-    • College/Professional pathway guidance
-    
-    Equipment Provided:
-    • Elite match and training balls
-    • Performance tracking equipment
-    • Full training kit
-    • Video analysis software access`,
+    • Performance Analysis: Video analysis and feedback sessions`,
     price: 399,
     duration: "16 weeks",
     sessionsPerWeek: 4,
     image: "https://images.unsplash.com/photo-1551280857-2b9bbe52acf4?auto=format&fit=crop&w=800&q=80",
     curriculum: [
-      "Elite Technical Training",
-      "Advanced Tactical Development",
-      "Physical Conditioning",
-      "Mental Performance",
-      "Match Analysis",
-      "Competition Preparation"
+      {
+        weekNumber: 1,
+        focus: "Elite Technical Training",
+        description: "Professional-level technical development",
+        objectives: ["Advanced ball mastery", "Complex skill execution", "Speed of play"],
+        drills: [
+          {
+            name: "Pro Technical Circuit",
+            description: "High-intensity technical training",
+            duration: "30 minutes",
+            metrics: ["Execution speed", "Technical precision", "Decision making"],
+            equipment: ["Pro training equipment", "Soccer balls"],
+            difficulty: "Advanced"
+          }
+        ]
+      },
+      {
+        weekNumber: 2,
+        focus: "Advanced Tactical Development",
+        description: "Complex tactical scenarios and solutions",
+        objectives: ["Game reading", "Decision making", "Tactical awareness"],
+        drills: [
+          {
+            name: "Tactical Scenarios",
+            description: "Match-specific tactical training",
+            duration: "45 minutes",
+            metrics: ["Decision accuracy", "Execution speed", "Team coordination"],
+            equipment: ["Training vests", "Cones", "Goals"],
+            difficulty: "Advanced"
+          }
+        ]
+      }
     ],
     weeklySchedule: [
       {
@@ -686,7 +718,7 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
               <section className="bg-white rounded-lg shadow-lg p-8 mb-8">
                 <h2 className="text-2xl font-bold mb-6">Program Overview</h2>
                 <div className="prose max-w-none">
-                  {program.fullDescription.split('\n').map((line, index) => (
+                  {program.fullDescription?.split('\n').map((line, index) => (
                     <p key={index} className="mb-4">{line}</p>
                   ))}
                 </div>
@@ -738,10 +770,10 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
                   <section className="bg-white rounded-lg shadow-lg p-8 mb-8">
                     <h2 className="text-2xl font-bold mb-6">Program Schedule</h2>
                     <div className="space-y-8">
-                      {program.weeklySchedule.map((week) => (
-                        <div key={week.week} className="border-l-4 border-[var(--primary-color)] pl-4">
+                      {program.weeklySchedule?.map((week) => (
+                        <div key={week.weekNumber} className="border-l-4 border-[var(--primary-color)] pl-4">
                           <h3 className="text-xl font-semibold mb-2">
-                            Week {week.week}: {week.focus}
+                            Week {week.weekNumber}: {week.focus}
                           </h3>
                           <div className="space-y-4">
                             <div>
