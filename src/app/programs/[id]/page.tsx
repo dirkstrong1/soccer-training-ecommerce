@@ -4,40 +4,14 @@ import Navbar from "@/components/Navbar";
 import { notFound } from "next/navigation";
 import { DownloadPDFButton } from "@/components/PdfTemplates";
 import DrillVideo from '@/components/DrillVideo';
-import { Program, CurriculumWeek } from '@/types/program';
+import { Program, CurriculumWeek, Drill, PositionSession } from '@/types/program';
+import React, { ReactNode } from 'react';
 
 interface WeeklySchedule {
-  weekNumber: number;
+  week: number;
   focus: string;
-  description: string;
-  objectives: string[];
   activities: string[];
   drills: Drill[];
-}
-
-interface PositionSession {
-  position: string;
-  description?: string;
-  drills: Drill[];
-  focus?: string[];
-}
-
-interface Drill {
-  name: string;
-  description: string;
-  duration: string;
-  metrics?: string[];
-  equipment?: string[];
-  difficulty?: string;
-  progressions?: string[];
-  focus?: string[];
-  video?: {
-    url: string;
-    license?: {
-      expirationDate: string;
-      territoryRestrictions?: string[];
-    };
-  };
 }
 
 interface ProgressTracking {
@@ -61,6 +35,7 @@ interface ProgramWithPreview extends Program {
   };
   weeklySchedule?: WeeklySchedule[];
   progressTracking?: ProgressTracking;
+  curriculum: CurriculumWeek[];
 }
 
 const programs: ProgramWithPreview[] = [
@@ -150,38 +125,56 @@ const programs: ProgramWithPreview[] = [
         position: "Forward",
         description: "Specialized training for attacking players",
         drills: [
-          "Finishing exercises",
-          "Movement patterns",
-          "First touch under pressure"
+          "Advanced finishing techniques and shooting drills",
+          "Striker movement and positioning training",
+          "Ball control under defensive pressure"
         ]
       },
       {
         position: "Midfielder",
         description: "Focused training for midfield players",
         drills: [
-          "Passing combinations",
-          "Receiving in tight spaces",
-          "Transition play"
+          "Complex passing patterns and combinations",
+          "Ball control and receiving in confined spaces",
+          "Quick transition between attack and defense"
+        ]
+      },
+      {
+        position: "Goalkeeper",
+        description: "Advanced goalkeeper training program",
+        drills: [
+          "Advanced shot-stopping techniques from various angles",
+          "Modern goalkeeper distribution and build-up play",
+          "Aerial command and positioning"
+        ]
+      },
+      {
+        position: "Defender",
+        description: "Elite defensive training program",
+        drills: [
+          "Elite defensive positioning and body orientation",
+          "Modern defender ball progression training",
+          "Aerial duels and defensive headers"
         ]
       }
     ],
     previewContent: {
       sampleWeek: {
         weekNumber: 1,
-        focus: "Technical Mastery",
-        description: "Advanced ball control techniques and complex dribbling patterns",
+        focus: "Professional Assessment",
+        description: "Comprehensive evaluation of player abilities",
         objectives: [
-          "Advanced ball control techniques",
-          "Complex dribbling patterns",
-          "Speed and agility with ball",
-          "Position-specific drills"
+          "Technical skill assessment",
+          "Physical fitness testing",
+          "Tactical understanding evaluation",
+          "Mental preparation introduction"
         ]
       },
       highlights: [
-        "Professional-level technical training",
-        "Position-specific development tracks",
-        "Video analysis sessions",
-        "Performance metrics tracking"
+        "Professional-standard training methodology",
+        "Performance analytics and video analysis",
+        "College/Professional pathway preparation",
+        "Mental performance coaching"
       ]
     }
   },
@@ -196,6 +189,48 @@ const programs: ProgramWithPreview[] = [
     • Physical Development: Speed, agility, and soccer-specific strength training`,
     price: 299,
     duration: "8 weeks",
+    ageGroup: "13-16",
+    skillLevel: "Advanced",
+    maxParticipants: 12,
+    schedule: {
+      startDate: "2024-04-01",
+      endDate: "2024-05-24",
+      sessions: [
+        {
+          day: "Monday",
+          time: "5:00 PM",
+          duration: "90 minutes"
+        },
+        {
+          day: "Wednesday",
+          time: "5:00 PM",
+          duration: "90 minutes"
+        },
+        {
+          day: "Friday",
+          time: "5:00 PM",
+          duration: "90 minutes"
+        }
+      ]
+    },
+    equipment: [
+      "Size 5 Soccer Ball",
+      "Training Vest",
+      "Cones",
+      "Agility Ladder",
+      "Performance Tracking Device"
+    ],
+    coaches: [
+      {
+        name: "Coach Maria Rodriguez",
+        role: "Head Coach",
+        qualifications: [
+          "UEFA A License",
+          "Youth Elite Certification",
+          "Performance Analysis Certified"
+        ]
+      }
+    ],
     sessionsPerWeek: 3,
     image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80",
     curriculum: [
@@ -234,15 +269,8 @@ const programs: ProgramWithPreview[] = [
     ],
     weeklySchedule: [
       {
-        weekNumber: 1,
+        week: 1,
         focus: "Technical Mastery",
-        description: "Advanced ball control techniques and complex dribbling patterns",
-        objectives: [
-          "Advanced ball control techniques",
-          "Complex dribbling patterns",
-          "Speed and agility with ball",
-          "Position-specific drills"
-        ],
         activities: [
           "Technical drills",
           "Ball mastery exercises",
@@ -264,111 +292,62 @@ const programs: ProgramWithPreview[] = [
             duration: "30 minutes",
             metrics: ["Individual practice", "With passive defender", "With active defender"],
             equipment: ["Cones", "Soccer balls", "Training vests"],
-            difficulty: "Intermediate"
-          }
-        ]
-      },
-      {
-        weekNumber: 3,
-        focus: "Tactical Development",
-        description: "Game reading exercises and tactical decision-making",
-        objectives: [
-          "Game reading exercises",
-          "Tactical decision-making",
-          "Team shape and movement",
-          "Advanced game scenarios"
-        ],
-        activities: [
-          "Tactical analysis",
-          "Game scenarios",
-          "Team shape work",
-          "Decision-making exercises"
-        ],
-        drills: [
-          {
-            name: "Positional Play",
-            description: "Position-specific tactical training in game situations",
-            duration: "30 minutes",
-            metrics: ["Structured play", "Semi-structured", "Free play with conditions"],
-            equipment: ["Cones", "Soccer balls", "Training vests"],
-            difficulty: "Advanced"
-          },
-          {
-            name: "Tactical Analysis",
-            description: "Video analysis and on-field replication of professional situations",
-            duration: "25 minutes",
-            metrics: ["Analysis", "Walk-through", "Game speed execution"],
-            equipment: ["Video equipment", "Training vests", "Cones"],
             difficulty: "Advanced"
           }
         ]
       },
       {
-        weekNumber: 6,
-        focus: "Game Integration",
-        description: "Applying technical and tactical skills in game situations",
-        objectives: [
-          "High-intensity application",
-          "Game-specific scenarios",
-          "Competitive implementation",
-          "Match analysis"
-        ],
+        week: 4,
+        focus: "Advanced Development",
         activities: [
-          "High-intensity technical drills",
-          "Complex tactical situations",
-          "Competitive small-sided games",
-          "Match analysis"
+          "High-intensity technical training",
+          "Complex tactical scenarios",
+          "Strength and conditioning",
+          "Mental resilience training"
         ],
         drills: [
           {
-            name: "Pressure Training",
-            description: "High-intensity technical skills under pressure",
-            duration: "25 minutes",
-            metrics: ["Technical precision", "Speed of execution", "Decision making"],
-            equipment: ["Cones", "Soccer balls", "Training vests"],
-            difficulty: "Advanced"
-          },
-          {
-            name: "Game Scenarios",
-            description: "Match-specific situations with tactical objectives",
+            name: "Professional Skills Circuit",
+            description: "High-intensity technical training under fatigue",
             duration: "35 minutes",
+            metrics: ["Technical precision", "Speed of execution", "Decision making"],
+            equipment: ["Training vests", "Cones", "Soccer balls"],
+            difficulty: "Advanced"
+          },
+          {
+            name: "Elite Game Scenarios",
+            description: "Professional match situations",
+            duration: "45 minutes",
             metrics: ["Structured play", "High pressure", "Match conditions"],
-            equipment: ["Cones", "Soccer balls", "Goals"],
+            equipment: ["Training vests", "Cones", "Goals"],
             difficulty: "Advanced"
           }
         ]
       },
       {
-        weekNumber: 8,
-        focus: "Performance Evaluation",
-        description: "Final assessment of player development",
-        objectives: [
-          "Technical proficiency",
-          "Tactical understanding",
-          "Competitive performance",
-          "Individual analysis"
-        ],
+        week: 8,
+        focus: "Performance Integration",
         activities: [
-          "Technical assessments",
-          "Tactical understanding tests",
-          "Competitive matches",
-          "Individual player analysis"
+          "Match-specific training",
+          "Video analysis sessions",
+          "Advanced game strategies",
+          "Competition preparation"
         ],
         drills: [
           {
-            name: "Performance Testing",
-            description: "Comprehensive technical and tactical assessment",
-            duration: "40 minutes",
-            metrics: ["Technical proficiency", "Decision making", "Physical performance"],
-            equipment: ["Testing equipment", "Soccer balls", "Cones"],
+            name: "Match Simulation",
+            description: "Full-intensity match practice with specific objectives",
+            duration: "60 minutes",
+            metrics: ["Team tactics", "Individual roles", "Game management"],
+            equipment: ["Training vests", "Soccer balls", "Goals"],
             difficulty: "Advanced"
           },
           {
-            name: "Competitive Evaluation",
-            description: "Match play with specific focus areas",
-            duration: "45 minutes",
-            metrics: ["Match performance", "Leadership", "Game management"],
-            equipment: ["Match equipment", "Training vests", "Goals"],
+            name: "Position Mastery",
+            description: "Advanced position-specific training",
+            duration: "40 minutes",
+            metrics: ["Individual work", "Unit training", "Team integration"],
+            equipment: ["Training vests", "Cones", "Soccer balls"],
             difficulty: "Advanced"
           }
         ]
@@ -381,9 +360,9 @@ const programs: ProgramWithPreview[] = [
         description: "Comprehensive evaluation of player abilities",
         objectives: [
           "Technical skill assessment",
-          "Physical fitness evaluation",
-          "Tactical understanding",
-          "Mental preparation"
+          "Physical fitness testing",
+          "Tactical understanding evaluation",
+          "Mental preparation introduction"
         ]
       },
       highlights: [
@@ -396,110 +375,42 @@ const programs: ProgramWithPreview[] = [
     positionSpecificSessions: [
       {
         position: "Goalkeeper",
+        description: "Advanced goalkeeper training program",
         drills: [
-          {
-            name: "Shot Stopping Mastery",
-            description: "Advanced shot-stopping techniques from various angles and distances",
-            duration: "30 minutes",
-            metrics: ["Save percentage", "Positioning score", "Recovery speed"],
-            equipment: ["Goals", "Soccer balls", "Training cones"],
-            difficulty: "Advanced"
-          },
-          {
-            name: "Distribution Training",
-            description: "Modern goalkeeper distribution and build-up play",
-            duration: "25 minutes",
-            metrics: ["Short passing", "Long distribution", "Goal kicks", "Counter-attack initiation"],
-            equipment: ["Goals", "Soccer balls", "Training cones"],
-            difficulty: "Advanced"
-          }
-        ],
-        focus: [
-          "Shot-stopping techniques",
-          "Modern distribution skills",
-          "Aerial command",
-          "Leadership and communication"
+          "Advanced shot-stopping techniques from various angles and distances",
+          "Modern goalkeeper distribution and build-up play",
+          "Aerial command and positioning training",
+          "Communication and leadership exercises"
         ]
       },
       {
         position: "Forward",
+        description: "Elite striker development program",
         drills: [
-          {
-            name: "Elite Finishing",
-            description: "Advanced shooting techniques from various angles and situations",
-            duration: "30 minutes",
-            metrics: ["Conversion rate", "Technique score", "Decision making"],
-            equipment: ["Goals", "Soccer balls", "Training cones"],
-            difficulty: "Advanced"
-          },
-          {
-            name: "Movement Pattern Training",
-            description: "Professional striker movement patterns and positioning",
-            duration: "25 minutes",
-            metrics: ["Off-ball movement", "Creating space", "Timing runs"],
-            equipment: ["Training vests", "Cones", "Soccer balls"],
-            difficulty: "Advanced"
-          }
-        ],
-        focus: [
-          "Advanced finishing techniques",
-          "Creating separation from defenders",
-          "Link-up play",
-          "Goal-scoring mentality"
+          "Advanced shooting techniques and finishing drills",
+          "Professional striker movement patterns",
+          "High-pressure finishing scenarios",
+          "Link-up play and combination training"
         ]
       },
       {
         position: "Midfielder",
+        description: "Advanced midfield mastery program",
         drills: [
-          {
-            name: "360° Awareness",
-            description: "Midfield scanning and awareness training",
-            duration: "25 minutes",
-            metrics: ["Scan frequency", "Decision accuracy", "Pass completion"],
-            equipment: ["Cones", "Soccer balls", "Training vests"],
-            difficulty: "Advanced"
-          },
-          {
-            name: "Line-Breaking Passes",
-            description: "Progressive passing techniques and execution",
-            duration: "30 minutes",
-            metrics: ["Pass selection", "Weight of pass", "Receiving position"],
-            equipment: ["Cones", "Soccer balls", "Training vests"],
-            difficulty: "Advanced"
-          }
-        ],
-        focus: [
-          "Field awareness and scanning",
-          "Progressive passing",
-          "Space interpretation",
-          "Transition control"
+          "Midfield scanning and awareness training",
+          "Progressive passing techniques and execution",
+          "Space interpretation exercises",
+          "Transition control drills"
         ]
       },
       {
         position: "Defender",
+        description: "Elite defensive development program",
         drills: [
-          {
-            name: "Defensive Positioning",
-            description: "Elite defensive positioning and body orientation",
-            duration: "25 minutes",
-            metrics: ["Duel success", "Recovery speed", "Positioning score"],
-            equipment: ["Cones", "Soccer balls", "Training cones"],
-            difficulty: "Advanced"
-          },
-          {
-            name: "Build-Up Play",
-            description: "Modern defender ball progression training",
-            duration: "30 minutes",
-            metrics: ["Playing out from back", "Long-range passing", "Press resistance"],
-            equipment: ["Cones", "Soccer balls", "Training cones"],
-            difficulty: "Advanced"
-          }
-        ],
-        focus: [
-          "Defensive positioning",
-          "Build-up play",
-          "Aerial dominance",
-          "Leadership communication"
+          "Elite defensive positioning and body orientation",
+          "Modern defender ball progression training",
+          "Aerial duels and defensive headers",
+          "Build-up play from the back"
         ]
       }
     ],
@@ -535,6 +446,55 @@ const programs: ProgramWithPreview[] = [
     • Performance Analysis: Video analysis and feedback sessions`,
     price: 399,
     duration: "16 weeks",
+    ageGroup: "15-18",
+    skillLevel: "Elite",
+    maxParticipants: 10,
+    schedule: {
+      startDate: "2024-05-01",
+      endDate: "2024-08-24",
+      sessions: [
+        {
+          day: "Monday",
+          time: "6:00 PM",
+          duration: "90 minutes"
+        },
+        {
+          day: "Tuesday",
+          time: "6:00 PM",
+          duration: "90 minutes"
+        },
+        {
+          day: "Thursday",
+          time: "6:00 PM",
+          duration: "90 minutes"
+        },
+        {
+          day: "Friday",
+          time: "6:00 PM",
+          duration: "90 minutes"
+        }
+      ]
+    },
+    equipment: [
+      "Size 5 Soccer Ball",
+      "Training Vest",
+      "Cones",
+      "Agility Ladder",
+      "Performance Tracking Device",
+      "Heart Rate Monitor"
+    ],
+    coaches: [
+      {
+        name: "Coach David Martinez",
+        role: "Head Coach",
+        qualifications: [
+          "UEFA Pro License",
+          "Elite Youth Development Certification",
+          "Sports Science Degree",
+          "Performance Analysis Expert"
+        ]
+      }
+    ],
     sessionsPerWeek: 4,
     image: "https://images.unsplash.com/photo-1551280857-2b9bbe52acf4?auto=format&fit=crop&w=800&q=80",
     curriculum: [
@@ -576,107 +536,89 @@ const programs: ProgramWithPreview[] = [
         week: 1,
         focus: "Professional Assessment",
         activities: [
-          "Comprehensive skill assessment",
-          "Physical fitness testing",
-          "Tactical understanding evaluation",
-          "Mental preparation introduction"
+          "Technical drills",
+          "Ball mastery exercises",
+          "Speed and agility training",
+          "Position-specific work"
         ],
         drills: [
           {
             name: "Elite Technical Assessment",
             description: "Professional-level technical evaluation",
             duration: "45 minutes",
-            metrics: ["Speed of execution", "Precision", "Consistency"]
+            metrics: ["Speed of execution", "Precision", "Consistency"],
+            equipment: ["Testing equipment", "Soccer balls", "Cones"],
+            difficulty: "Advanced"
           },
           {
             name: "Tactical Intelligence Test",
             description: "Complex game situation analysis",
             duration: "40 minutes",
-            focus: ["Decision making", "Spatial awareness", "Game reading"]
+            metrics: ["Decision making", "Spatial awareness", "Game reading"],
+            equipment: ["Training vests", "Cones", "Soccer balls"],
+            difficulty: "Advanced"
           }
         ]
-      },
-      {
-        week: 4,
-        focus: "Advanced Development",
-        activities: [
-          "High-intensity technical training",
-          "Complex tactical scenarios",
-          "Strength and conditioning",
-          "Mental resilience training"
-        ],
-        drills: [
-          {
-            name: "Professional Skills Circuit",
-            description: "High-intensity technical training under fatigue",
-            duration: "35 minutes",
-            progressions: ["Technical precision", "Speed of execution", "Decision making"]
-          },
-          {
-            name: "Elite Game Scenarios",
-            description: "Professional match situations",
-            duration: "45 minutes",
-            progressions: ["Structured play", "High pressure", "Match conditions"]
-          }
-        ]
-      },
-      {
-        week: 8,
-        focus: "Performance Integration",
-        activities: [
-          "Match-specific training",
-          "Video analysis sessions",
-          "Advanced game strategies",
-          "Competition preparation"
-        ],
-        drills: [
-          {
-            name: "Match Simulation",
-            description: "Full-intensity match practice with specific objectives",
-            duration: "60 minutes",
-            focus: ["Team tactics", "Individual roles", "Game management"]
-          },
-          {
-            name: "Position Mastery",
-            description: "Advanced position-specific training",
-            duration: "40 minutes",
-            progressions: ["Individual work", "Unit training", "Team integration"]
-          }
-        ]
-      },
-      {
-        week: 16,
-        focus: "Elite Performance",
-        description: "Final performance assessment and game preparation",
+      }
+    ],
+    previewContent: {
+      sampleWeek: {
+        weekNumber: 1,
+        focus: "Professional Assessment",
+        description: "Comprehensive evaluation of player abilities",
         objectives: [
-          "Match performance",
-          "Tournament readiness",
-          "Team integration",
-          "Leadership development"
-        ],
-        activities: [
-          "High-level match play",
-          "Performance analysis",
-          "Tournament preparation",
-          "Final evaluations"
-        ],
+          "Technical skill assessment",
+          "Physical fitness testing",
+          "Tactical understanding evaluation",
+          "Mental preparation introduction"
+        ]
+      },
+      highlights: [
+        "Professional-standard training methodology",
+        "Performance analytics and video analysis",
+        "College/Professional pathway preparation",
+        "Mental performance coaching"
+      ]
+    },
+    positionSpecificSessions: [
+      {
+        position: "Goalkeeper",
+        description: "Advanced goalkeeper training program",
         drills: [
-          {
-            name: "Elite Performance Test",
-            description: "Comprehensive evaluation of all aspects",
-            duration: "90 minutes",
-            metrics: ["Technical mastery", "Tactical excellence", "Physical performance", "Mental readiness"],
-            equipment: ["Testing equipment", "Soccer balls", "Cones"],
-            difficulty: "Advanced"
-          },
-          {
-            name: "Professional Standard Games",
-            description: "Full matches with professional rules and intensity",
-            duration: "70 minutes",
-            metrics: ["Match performance", "Leadership", "Game management"],
-            equipment: ["Match equipment", "Training vests", "Goals"],
-            difficulty: "Advanced"
-          }
+          "Advanced shot-stopping techniques from various angles and distances",
+          "Modern goalkeeper distribution and build-up play",
+          "Aerial command and positioning training",
+          "Communication and leadership exercises"
+        ]
+      },
+      {
+        position: "Forward",
+        description: "Elite striker development program",
+        drills: [
+          "Advanced shooting techniques and finishing drills",
+          "Professional striker movement patterns",
+          "High-pressure finishing scenarios",
+          "Link-up play and combination training"
+        ]
+      },
+      {
+        position: "Midfielder",
+        description: "Advanced midfield mastery program",
+        drills: [
+          "Midfield scanning and awareness training",
+          "Progressive passing techniques and execution",
+          "Space interpretation exercises",
+          "Transition control drills"
+        ]
+      },
+      {
+        position: "Defender",
+        description: "Elite defensive development program",
+        drills: [
+          "Elite defensive positioning and body orientation",
+          "Modern defender ball progression training",
+          "Aerial duels and defensive headers",
+          "Build-up play from the back"
         ]
       }
     ],
@@ -699,37 +641,11 @@ const programs: ProgramWithPreview[] = [
         "Career pathway recommendations",
         "Long-term development plan"
       ]
-    },
-    previewContent: {
-      sampleWeek: {
-        week: 1,
-        focus: "Professional Assessment",
-        activities: [
-          "Comprehensive skill assessment",
-          "Physical fitness testing",
-          "Tactical understanding evaluation",
-          "Mental preparation introduction"
-        ],
-        drills: [
-          {
-            name: "Elite Technical Assessment",
-            description: "Professional-level technical evaluation",
-            duration: "45 minutes",
-            metrics: ["Speed of execution", "Precision", "Consistency"]
-          }
-        ]
-      },
-      highlights: [
-        "Professional-standard training methodology",
-        "Performance analytics and video analysis",
-        "College/Professional pathway preparation",
-        "Mental performance coaching"
-      ]
     }
   }
 ];
 
-export default function ProgramDetail({ params }: { params: { id: string } }) {
+export default function ProgramDetail({ params }: { params: { id: string } }): JSX.Element {
   const program = programs.find(p => p.id === params.id);
   
   if (!program) {
@@ -822,9 +738,9 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
                     <h2 className="text-2xl font-bold mb-6">Program Schedule</h2>
                     <div className="space-y-8">
                       {program.weeklySchedule?.map((week) => (
-                        <div key={week.weekNumber} className="border-l-4 border-[var(--primary-color)] pl-4">
+                        <div key={week.week} className="border-l-4 border-[var(--primary-color)] pl-4">
                           <h3 className="text-xl font-semibold mb-2">
-                            Week {week.weekNumber}: {week.focus}
+                            Week {week.week}: {week.focus}
                           </h3>
                           <div className="space-y-4">
                             <div>
@@ -844,12 +760,18 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
                                       <h5 className="font-semibold text-[var(--primary-color)] mb-3">{drill.name}</h5>
                                       <p className="text-sm text-gray-600 mb-2">{drill.description}</p>
                                       <p className="text-sm text-gray-500 mb-4">Duration: {drill.duration}</p>
-                                      {drill.progressions && (
-                                        <div className="mb-4">
-                                          <span className="text-sm font-medium">Progressions: </span>
-                                          <span className="text-sm text-gray-600">{drill.progressions.join(" → ")}</span>
-                                        </div>
-                                      )}
+                                      <div className="mb-4">
+                                        <span className="text-sm font-medium">Metrics: </span>
+                                        <span className="text-sm text-gray-600">{drill.metrics.join(", ")}</span>
+                                      </div>
+                                      <div className="mb-4">
+                                        <span className="text-sm font-medium">Equipment: </span>
+                                        <span className="text-sm text-gray-600">{drill.equipment.join(", ")}</span>
+                                      </div>
+                                      <div className="mb-4">
+                                        <span className="text-sm font-medium">Difficulty: </span>
+                                        <span className="text-sm text-gray-600">{drill.difficulty}</span>
+                                      </div>
                                       {drill.video && (
                                         <DrillVideo drill={drill} className="mt-4" />
                                       )}
@@ -873,29 +795,11 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
                             <h3 className="text-xl font-semibold mb-2">{posSession.position} Specialization</h3>
                             <div className="space-y-4">
                               <div>
-                                <h4 className="font-semibold text-gray-700 mb-2">Focus Areas:</h4>
-                                <ul className="space-y-2">
-                                  {posSession.focus?.map((item, i) => (
-                                    <li key={i} className="text-gray-600">• {item}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                              <div>
                                 <h4 className="font-semibold text-gray-700 mb-2">Specialized Drills:</h4>
                                 <div className="grid gap-4">
                                   {posSession.drills.map((drill, i) => (
                                     <div key={i} className="bg-gray-50 p-4 rounded-lg">
-                                      <h5 className="font-semibold text-[var(--primary-color)]">{drill.name}</h5>
-                                      <p className="text-sm text-gray-600 mb-2">{drill.description}</p>
-                                      <p className="text-sm text-gray-500">Duration: {drill.duration}</p>
-                                      {drill.progressions && (
-                                        <div className="mt-2">
-                                          <span className="text-sm font-medium">Progressions: </span>
-                                          <span className="text-sm text-gray-600">
-                                            {drill.progressions.join(" → ")}
-                                          </span>
-                                        </div>
-                                      )}
+                                      <h5 className="font-semibold text-[var(--primary-color)]">{drill}</h5>
                                     </div>
                                   ))}
                                 </div>
@@ -989,6 +893,16 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
                   </div>
                 </section>
               )}
+
+              {/* Curriculum Section */}
+              <section className="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h2 className="text-2xl font-bold mb-6">Program Curriculum</h2>
+                <div className="space-y-8">
+                  {program.curriculum.map((week) => (
+                    <CurriculumWeekComponent key={week.weekNumber} week={week} />
+                  ))}
+                </div>
+              </section>
             </div>
 
             {/* Sidebar */}
@@ -1006,9 +920,9 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
                 <div className="mb-8">
                   <h3 className="font-semibold mb-4">Program Includes:</h3>
                   <ul className="space-y-2">
-                    {program.curriculum.map((item, index) => (
+                    {program.curriculum.map((week, index) => (
                       <li key={index} className="flex items-center text-gray-600">
-                        <span className="mr-2">•</span> {item}
+                        <span className="mr-2">•</span> Week {week.weekNumber}: {week.focus}
                       </li>
                     ))}
                   </ul>
@@ -1026,5 +940,57 @@ export default function ProgramDetail({ params }: { params: { id: string } }) {
         </div>
       </main>
     </>
+  );
+}
+
+function CurriculumWeekComponent({ week }: { week: CurriculumWeek }): JSX.Element {
+  return (
+    <div className="border-l-4 border-[var(--primary-color)] pl-4">
+      <h3 className="text-xl font-semibold mb-2">
+        Week {week.weekNumber}: {week.focus}
+      </h3>
+      <p className="text-gray-600 mb-4">{week.description}</p>
+      <div className="space-y-4">
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Objectives</h4>
+          <ul className="list-disc pl-5 space-y-2">
+            {week.objectives.map((objective, index) => (
+              <li key={index} className="text-gray-600">{objective}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Drills</h4>
+          <div className="grid gap-4 md:grid-cols-2">
+            {week.drills.map((drill, index) => (
+              <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                <h5 className="font-semibold mb-2">{drill.name}</h5>
+                <p className="text-gray-600 text-sm mb-2">{drill.description}</p>
+                <div className="text-sm text-gray-500">
+                  <p>Duration: {drill.duration}</p>
+                  <p>Difficulty: {drill.difficulty}</p>
+                  <div className="mt-2">
+                    <p className="font-medium">Equipment:</p>
+                    <ul className="list-disc pl-5">
+                      {drill.equipment.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-2">
+                    <p className="font-medium">Metrics:</p>
+                    <ul className="list-disc pl-5">
+                      {drill.metrics.map((metric, i) => (
+                        <li key={i}>{metric}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 } 
