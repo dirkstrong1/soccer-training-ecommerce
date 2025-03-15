@@ -66,37 +66,14 @@ const programs: ProgramWithPreview[] = [
     curriculum: [
       {
         weekNumber: 1,
-        focus: "Technical Mastery",
-        description: "Advanced ball control techniques and complex dribbling patterns",
-        objectives: [
-          "Advanced ball control techniques",
-          "Complex dribbling patterns",
-          "Speed and agility with ball",
-          "Position-specific drills"
-        ],
+        focus: "Advanced Ball Control",
+        description: "Master advanced ball control techniques",
+        objectives: ["Ball mastery", "First touch", "Dribbling"],
         drills: [
           {
             name: "Ball Mastery Circuit",
             description: "Progressive ball control exercises",
             duration: "20 minutes",
-            video: {
-              id: "video-1",
-              url: "https://www.youtube.com/watch?v=q1B4is3faOM",
-              title: "Professional Ball Mastery Training",
-              creator: "Soccer Training Videos",
-              createdDate: "2024-01-01",
-              duration: "20 minutes",
-              license: {
-                id: "license-1",
-                type: "partnership",
-                startDate: "2024-01-01",
-                terms: ["Commercial use allowed", "Attribution required"],
-                restrictions: [],
-                territoryRestrictions: []
-              },
-              attribution: "© Soccer Training Videos - Used with permission",
-              tags: ["ball control", "mastery", "beginner"]
-            },
             metrics: ["Ball touches per minute", "Successful moves completed"],
             equipment: ["Cones", "Soccer ball"],
             difficulty: "Beginner"
@@ -105,39 +82,16 @@ const programs: ProgramWithPreview[] = [
       },
       {
         weekNumber: 2,
-        focus: "First Touch Development",
-        description: "Receiving and controlling passes under pressure",
-        objectives: [
-          "Clean first touches",
-          "Control under pressure",
-          "Passing combinations",
-          "Movement patterns"
-        ],
+        focus: "Speed & Agility with Ball",
+        description: "Develop speed and agility while maintaining ball control",
+        objectives: ["Quick turns", "Acceleration with ball", "Change of direction"],
         drills: [
           {
-            name: "First Touch Development",
-            description: "Receiving and controlling passes",
+            name: "Speed Dribbling",
+            description: "High-intensity dribbling exercises",
             duration: "25 minutes",
-            video: {
-              id: "video-2",
-              url: "https://www.youtube.com/watch?v=9Hdg3D6QuPs",
-              title: "Advanced First Touch Training",
-              creator: "Soccer Training Videos",
-              createdDate: "2024-01-01",
-              duration: "25 minutes",
-              license: {
-                id: "license-2",
-                type: "partnership",
-                startDate: "2024-01-01",
-                terms: ["Commercial use allowed", "Attribution required"],
-                restrictions: [],
-                territoryRestrictions: []
-              },
-              attribution: "© Soccer Training Videos - Used with permission",
-              tags: ["first touch", "control", "intermediate"]
-            },
-            metrics: ["Clean first touches", "Control under pressure"],
-            equipment: ["Soccer balls", "Passing gates"],
+            metrics: ["Sprint times", "Ball control accuracy"],
+            equipment: ["Cones", "Soccer balls", "Timing gates"],
             difficulty: "Intermediate"
           }
         ]
@@ -183,20 +137,20 @@ const programs: ProgramWithPreview[] = [
     previewContent: {
       sampleWeek: {
         weekNumber: 1,
-        focus: "Foundation & Assessment",
-        description: "Introduction to basic techniques and initial skill assessment",
+        focus: "Technical Mastery",
+        description: "Advanced ball control techniques and complex dribbling patterns",
         objectives: [
-          "Complete individual skill assessment",
-          "Learn basic ball control exercises",
-          "Practice fundamental passing techniques",
-          "Participate in small-sided games"
+          "Advanced ball control techniques",
+          "Complex dribbling patterns",
+          "Speed and agility with ball",
+          "Position-specific drills"
         ]
       },
       highlights: [
-        "Ajax-inspired youth development methodology",
-        "Age-appropriate skill progression",
-        "Individual progress tracking",
-        "Fun, game-based learning approach"
+        "Professional-level technical training",
+        "Position-specific development tracks",
+        "Video analysis sessions",
+        "Performance metrics tracking"
       ]
     }
   },
@@ -235,7 +189,7 @@ const programs: ProgramWithPreview[] = [
     ],
     weeklySchedule: [
       {
-        weekNumber: "1",
+        weekNumber: 1,
         focus: "Technical Mastery",
         description: "Advanced ball control techniques and complex dribbling patterns",
         objectives: [
@@ -264,9 +218,10 @@ const programs: ProgramWithPreview[] = [
         ]
       },
       {
-        week: 3,
+        weekNumber: 3,
         focus: "Tactical Development",
-        activities: [
+        description: "Game reading exercises and tactical decision-making",
+        objectives: [
           "Game reading exercises",
           "Tactical decision-making",
           "Team shape and movement",
@@ -277,13 +232,17 @@ const programs: ProgramWithPreview[] = [
             name: "Positional Play",
             description: "Position-specific tactical training in game situations",
             duration: "30 minutes",
-            progressions: ["Structured play", "Semi-structured", "Free play with conditions"]
+            metrics: ["Structured play", "Semi-structured", "Free play with conditions"],
+            equipment: ["Cones", "Soccer balls", "Training vests"],
+            difficulty: "Advanced"
           },
           {
             name: "Tactical Analysis",
             description: "Video analysis and on-field replication of professional situations",
             duration: "25 minutes",
-            progressions: ["Analysis", "Walk-through", "Game speed execution"]
+            metrics: ["Analysis", "Walk-through", "Game speed execution"],
+            equipment: ["Video equipment", "Training vests", "Cones"],
+            difficulty: "Advanced"
           }
         ]
       },
@@ -338,21 +297,14 @@ const programs: ProgramWithPreview[] = [
     ],
     previewContent: {
       sampleWeek: {
-        week: 1,
+        weekNumber: 1,
         focus: "Technical Mastery",
-        activities: [
+        description: "Advanced ball control techniques and complex dribbling patterns",
+        objectives: [
           "Advanced ball control techniques",
           "Complex dribbling patterns",
           "Speed and agility with ball",
           "Position-specific drills"
-        ],
-        drills: [
-          {
-            name: "La Masia Rondo",
-            description: "Advanced possession game with positional rotations",
-            duration: "25 minutes",
-            progressions: ["6v2", "5v2 one-touch", "4v2 with target player"]
-          }
         ]
       },
       highlights: [
