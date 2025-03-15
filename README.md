@@ -1,4 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Soccer Training E-commerce Platform
+
+A comprehensive platform for managing soccer training programs with video content management and license tracking.
+
+## Features
+
+- Video content management with license tracking
+- Automated notifications for expiring licenses
+- Territory-based content restrictions
+- PDF generation for training programs
+- Admin dashboard for content management
+
+## Tech Stack
+
+- Next.js 14
+- TypeScript
+- Prisma
+- PostgreSQL
+- Tailwind CSS
+- Vercel
 
 ## Getting Started
 
@@ -8,15 +27,28 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+DATABASE_URL="your_database_url"
+CRON_SECRET_KEY="your_cron_secret"
+```
+
+## Database Setup
+
+```bash
+# Generate Prisma client
+npx prisma generate
+
+# Push schema changes to database
+npx prisma db push
+```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
