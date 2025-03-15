@@ -1,6 +1,6 @@
 import { Program } from '@/types/program';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { ProgressTrackingForm, PlayerEvaluationForm } from './PdfTemplates';
+import { ProgramPDF, ProgressTrackingPDF, PlayerEvaluationPDF } from './PdfTemplates';
 
 interface DownloadPDFButtonProps {
   program: Program;
@@ -12,9 +12,9 @@ export default function DownloadPDFButton({ program, position, type = 'program' 
   const getDocument = () => {
     switch (type) {
       case 'progress':
-        return <ProgressTrackingForm program={program} />;
+        return <ProgressTrackingPDF program={program} />;
       case 'evaluation':
-        return <PlayerEvaluationForm program={program} />;
+        return <PlayerEvaluationPDF program={program} />;
       case 'position':
         return position ? (
           <ProgramPDF program={program} position={position} />

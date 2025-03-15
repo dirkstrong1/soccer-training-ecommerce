@@ -98,4 +98,5 @@ export interface Program {
   equipment: string[];
   coaches: Coach[];
   positionSpecificSessions: PositionSession[];
+  progressTracking?: ProgressTracking;
 } 

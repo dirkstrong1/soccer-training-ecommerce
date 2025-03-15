@@ -78,9 +78,7 @@ export class VideoContentService {
       where: {
         license: {
           territoryRestrictions: {
-            none: {
-              equals: countryCode,
-            },
+            hasEvery: [countryCode],
           },
         },
       },

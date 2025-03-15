@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { notFound } from "next/navigation";
-import { DownloadPDFButton } from "@/components/PdfTemplates";
+import DownloadPDFButton from "@/components/DownloadPDFButton";
 import DrillVideo from '@/components/DrillVideo';
 import { Program, CurriculumWeek, Drill, PositionSession } from '@/types/program';
 import React, { ReactNode } from 'react';
