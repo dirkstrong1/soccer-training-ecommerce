@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { VideoContentService } from '@/services/videoContentService';
 import { PlusIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
