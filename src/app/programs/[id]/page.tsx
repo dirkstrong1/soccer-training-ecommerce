@@ -2,10 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { notFound } from "next/navigation";
-import DownloadPDFButton from "@/components/DownloadPDFButton";
+import dynamic from 'next/dynamic';
 import DrillVideo from '@/components/DrillVideo';
 import { Program, CurriculumWeek, Drill, PositionSession } from '@/types/program';
 import React, { ReactNode } from 'react';
+
+const DownloadPDFButton = dynamic(
+  () => import('@/components/DownloadPDFButton'),
+  { ssr: false }
+);
 
 interface WeeklySchedule {
   week: number;
@@ -652,8 +657,8 @@ export default function ProgramDetail({ params }: { params: { id: string } }): J
     notFound();
   }
 
-  // Simulated purchase check - in real app, this would check against user's purchases
-  const isPurchased = false;
+  // Simulated purchase check - temporarily set to true to view paywalled content
+  const isPurchased = true;
 
   return (
     <>

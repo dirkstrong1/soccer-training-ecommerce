@@ -1,3 +1,5 @@
+'use client';
+
 import { Program } from '@/types/program';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { ProgramPDF, ProgressTrackingPDF, PlayerEvaluationPDF } from './PdfTemplates';
